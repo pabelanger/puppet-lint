@@ -14,6 +14,14 @@ describe 'class_parameter_defaults' do
     }
   end
 
+  describe 'parameterised class with a params containing a variable' do
+    let(:code) { "class foo($bar=\"https://${::fqdn}/\") { }" }
+
+    its(:problems) {
+      should_not have_problem :kind => :warning
+    }
+  end
+
   describe 'parameterised class with multiple params with a default value' do
     let(:code) { "class foo($bar, $baz, $gronk) { }" }
 
